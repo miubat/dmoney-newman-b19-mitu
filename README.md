@@ -61,3 +61,7 @@ npm test
 ```
 
 This runs `Report.js`, which executes the Postman collection (`collection/Dmoney-B19.json`) through Newman and generates an HTML report at `Reports/report.html`. Open that file in a browser to view detailed results.
+
+## reports
+<img width="566" height="564" alt="Screenshot_80" src="https://github.com/user-attachments/assets/9109d97e-032b-4a04-b69a-2fc5640b2e83" />
+
