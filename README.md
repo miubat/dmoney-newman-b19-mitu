@@ -2,7 +2,7 @@
 
 ## Project Summary
 
-API test automation suite for the **Dmoney** mobile money application, built with [Postman](https://www.postman.com/) collections and run headlessly via [Newman](https://github.com/postmanlabs/newman). It exercises the full user journey — from account creation to money transfers — across five actor types (Admin, System, Agent, Customer, Merchant), including both positive and negative test cases, and produces a styled HTML test report.
+API test automation suite for the **Dmoney** mobile money application, built with [Postman](https://www.postman.com/) collections and run headlessly via [Newman](https://github.com/postmanlabs/newman). It exercises the full user journey — from account creation to money transfers — across Admin, System, Agent, and Customer roles, including both positive and negative test cases, and produces a styled HTML test report.
 
 ### What the collection tests
 
@@ -13,9 +13,8 @@ API test automation suite for the **Dmoney** mobile money application, built wit
 | **Agent** | Login, OTP verification, deposit to Customer, negative cases (insufficient balance, invalid account) |
 | **Customer1** | Login, OTP verification, send money to Customer2, negative cases (insufficient balance, invalid receiver) |
 | **Customer2** | Login, OTP verification, cash-out from Agent, pay Merchant, negative cases (insufficient balance, invalid merchant account) |
-| **Merchant** | Login, OTP verification |
 
-Auth tokens and OTPs are captured from responses and chained into collection variables, so the whole run simulates a realistic end-to-end money flow: Admin onboards users → System funds an Agent → Agent deposits to a Customer → Customer sends/cashes out/pays a Merchant.
+Auth tokens and OTPs are captured from responses and chained into collection variables, so the whole run simulates a realistic end-to-end money flow: Admin onboards users (including the Merchant account) → System funds an Agent → Agent deposits to a Customer → Customer sends/cashes out/pays a Merchant. 30 test cases in total, covering both positive and negative scenarios.
 
 ## Technologies
 
