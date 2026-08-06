@@ -8,13 +8,13 @@ API test automation suite for the **Dmoney** mobile money application, built wit
 
 | Folder | Covered scenarios |
 |---|---|
-| **Admin** | Login, create Customer/Agent/Merchant, view user list, activate accounts, negative cases (duplicate email, missing required field) |
+| **Admin** | Login, create Customer/Agent/Merchant, view user list, activate accounts, negative cases (invalid login credentials, duplicate email, missing required field) |
 | **System** | System login, deposit funds to an Agent |
-| **Agent** | Login, OTP verification, deposit to Customer, negative cases (insufficient balance, invalid account) |
-| **Customer1** | Login, OTP verification, send money to Customer2, negative cases (insufficient balance, invalid receiver) |
-| **Customer2** | Login, OTP verification, cash-out from Agent, pay Merchant, negative cases (insufficient balance, invalid merchant account) |
+| **Agent** | Login, OTP verification, deposit to Customer, negative cases (insufficient balance, invalid account, invalid/zero amount) |
+| **Customer1** | Login, OTP verification, send money to Customer2, negative cases (insufficient balance, invalid receiver, invalid/zero amount) |
+| **Customer2** | Login, OTP verification, cash-out from Agent, pay Merchant, negative cases (insufficient balance, invalid merchant account, invalid/zero amount) |
 
-Auth tokens and OTPs are captured from responses and chained into collection variables, so the whole run simulates a realistic end-to-end money flow: Admin onboards users (including the Merchant account) → System funds an Agent → Agent deposits to a Customer → Customer sends/cashes out/pays a Merchant. 30 test cases in total, covering both positive and negative scenarios.
+Auth tokens and OTPs are captured from responses and chained into collection variables, so the whole run simulates a realistic end-to-end money flow: Admin onboards users (including the Merchant account) → System funds an Agent → Agent deposits to a Customer → Customer sends/cashes out/pays a Merchant. 34 test cases in total (48 assertions), covering both positive and negative scenarios — all negative cases are verified against real API error responses.
 
 ## Technologies
 
@@ -64,10 +64,8 @@ This runs `Report.js`, which executes the Postman collection (`collection/Dmoney
 ## reports
 <img width="563" height="570" alt="Screenshot_82" src="https://github.com/user-attachments/assets/1ec10597-6b83-4df8-a027-cd5a05ea438e" />
 
-
-
 ## Documentation
-https://documenter.getpostman.com/view/32590645/2sBY4VJxGA
+https://documenter.getpostman.com/view/32590645/2sBY4VKHfe
 
 ## Test Cases
 [Postman Collection — Dmoney-B19.json](collection/Dmoney-B19.json)
