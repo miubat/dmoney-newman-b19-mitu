@@ -91,11 +91,11 @@
 									"pm.collectionVariables.set(\"customer1_id\",userId);\r",
 									"\r",
 									"\r",
-									"pm.test(\"Verify if the user is created\",()=>{\r",
+									"pm.test(\"Verify if Customer 1 is created\",()=>{\r",
 									"    pm.expect(res.message).to.eql(\"User created\");\r",
 									"})     //callback function\r",
 									"\r",
-									"pm.test(\"Status code is 201\", ()=> {\r",
+									"pm.test(\"Customer 1 - Status code is 201\", ()=> {\r",
 									"    pm.response.to.have.status(201);\r",
 									"});"
 								],
@@ -179,11 +179,11 @@
 									"pm.collectionVariables.set(\"customer2_id\",userId);\r",
 									"\r",
 									"\r",
-									"pm.test(\"Verify if the user is created\",()=>{\r",
+									"pm.test(\"Verify if Customer 2 is created\",()=>{\r",
 									"    pm.expect(res.message).to.eql(\"User created\");\r",
 									"})     //callback function\r",
 									"\r",
-									"pm.test(\"Status code is 201\", ()=> {\r",
+									"pm.test(\"Customer 2 - Status code is 201\", ()=> {\r",
 									"    pm.response.to.have.status(201);\r",
 									"});"
 								],
@@ -267,11 +267,11 @@
 									"pm.collectionVariables.set(\"agent_id\",userId);\r",
 									"\r",
 									"\r",
-									"pm.test(\"Verify if the user is created\",()=>{\r",
+									"pm.test(\"Verify if Agent is created\",()=>{\r",
 									"    pm.expect(res.message).to.eql(\"User created\");\r",
 									"})     //callback function\r",
 									"\r",
-									"pm.test(\"Status code is 201\", ()=> {\r",
+									"pm.test(\"Agent - Status code is 201\", ()=> {\r",
 									"    pm.response.to.have.status(201);\r",
 									"});"
 								],
@@ -355,11 +355,11 @@
 									"pm.collectionVariables.set(\"Merchant_id\",userId);\r",
 									"\r",
 									"\r",
-									"pm.test(\"Verify if the user is created\",()=>{\r",
+									"pm.test(\"Verify if Merchant is created\",()=>{\r",
 									"    pm.expect(res.message).to.eql(\"User created\");\r",
 									"})     //callback function\r",
 									"\r",
-									"pm.test(\"Status code is 201\", ()=> {\r",
+									"pm.test(\"Merchant - Status code is 201\", ()=> {\r",
 									"    pm.response.to.have.status(201);\r",
 									"});"
 								],
@@ -849,11 +849,11 @@
 								"exec": [
 									"const res = pm.response.json();",
 									"",
-									"pm.test('Status code is 200/201', function () {",
+									"pm.test('System Deposit - Status code is 200/201', function () {",
 									"    pm.expect([200,201]).to.include(pm.response.code);",
 									"});",
 									"",
-									"pm.test('Message Exists', function () {",
+									"pm.test('System Deposit - Message Exists', function () {",
 									"    pm.expect(res.message).to.not.be.empty;",
 									"});"
 								],
@@ -993,7 +993,7 @@
 								"exec": [
 									"const res = pm.response.json();",
 									"",
-									"pm.test('Status code is 200/201', function () {",
+									"pm.test('Agent Deposit - Status code is 200/201', function () {",
 									"    pm.expect([200,201]).to.include(pm.response.code);",
 									"});",
 									"",
@@ -1058,7 +1058,7 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"pm.test('Status code is 400 for insufficient balance', function () {",
+									"pm.test('Agent Deposit - Status code is 400 for insufficient balance', function () {",
 									"    pm.expect([400,422]).to.include(pm.response.code);",
 									"});"
 								],
@@ -1245,7 +1245,7 @@
 								"exec": [
 									"const res = pm.response.json();",
 									"",
-									"pm.test('Status code is 200/201', function () {",
+									"pm.test('Send Money - Status code is 200/201', function () {",
 									"    pm.expect([200,201]).to.include(pm.response.code);",
 									"});",
 									"",
@@ -1307,7 +1307,7 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"pm.test('Status code is 400 for insufficient balance', function () {",
+									"pm.test('Send Money - Status code is 400 for insufficient balance', function () {",
 									"    pm.expect([400,422]).to.include(pm.response.code);",
 									"});"
 								],
@@ -1498,7 +1498,7 @@
 									"    pm.expect([200,201]).to.include(pm.response.code);",
 									"});",
 									"",
-									"pm.test('Message Exists', function () {",
+									"pm.test('Cashout - Message Exists', function () {",
 									"    pm.expect(res.message).to.not.be.empty;",
 									"});",
 									"",
@@ -1561,7 +1561,7 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"pm.test('Status code is 400 for insufficient balance', function () {",
+									"pm.test('Cashout - Status code is 400 for insufficient balance', function () {",
 									"    pm.expect([400,422]).to.include(pm.response.code);",
 									"});"
 								],
@@ -1620,7 +1620,7 @@
 									"    pm.expect([200,201]).to.include(pm.response.code);",
 									"});",
 									"",
-									"pm.test('Message Exists', function () {",
+									"pm.test('Pay Merchant - Message Exists', function () {",
 									"    pm.expect(res.message).to.not.be.empty;",
 									"});"
 								],
