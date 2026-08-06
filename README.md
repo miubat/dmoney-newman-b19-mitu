@@ -67,3 +67,6 @@ This runs `Report.js`, which executes the Postman collection (`collection/Dmoney
 
 ## Documentation
 https://documenter.getpostman.com/view/32590645/2sBY4VJxGA
+
+## Test Cases
+[Postman Collection — Dmoney-B19.json](collection/Dmoney-B19.json)
