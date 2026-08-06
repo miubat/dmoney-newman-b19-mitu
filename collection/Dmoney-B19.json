@@ -54,6 +54,53 @@
 					"response": []
 				},
 				{
+					"name": "Admin Login - Invalid Credentials (Negative)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Admin Login - Status code is 401 for wrong password', function () {",
+									"    pm.response.to.have.status(401);",
+									"});",
+									"",
+									"pm.test('Admin Login - Error message is Password incorrect', function () {",
+									"    const res = pm.response.json();",
+									"    pm.expect(res.message).to.eql('Password incorrect');",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"admin@dmoney.com\",\r\n  \"password\": \"wrongpass\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/user/login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Create Customer 1",
 					"event": [
 						{
@@ -745,8 +792,18 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"pm.test('Status code is 400 for missing email', function () {",
+									"pm.test('Missing Field - Status code is 400 for missing email', function () {",
 									"    pm.response.to.have.status(400);",
+									"});",
+									"",
+									"pm.test('Missing Field - Error message mentions email is required', function () {",
+									"    const res = pm.response.json();",
+									"    pm.expect(res.message).to.include('email');",
+									"});",
+									"",
+									"pm.test('Missing Field - No user is created in response', function () {",
+									"    const res = pm.response.json();",
+									"    pm.expect(res.user).to.be.undefined;",
 									"});"
 								],
 								"type": "text/javascript",
@@ -1156,6 +1213,64 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Agent Deposit - Invalid Amount (Negative)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Agent Deposit - Status code is 400 for zero amount', function () {",
+									"    pm.response.to.have.status(400);",
+									"});",
+									"",
+									"pm.test('Agent Deposit - Error message for invalid amount', function () {",
+									"    const res = pm.response.json();",
+									"    pm.expect(res.message).to.eql('Amount must be a valid number greater than 0');",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{agent_token}}",
+								"type": "text"
+							},
+							{
+								"key": "X-AUTH-SECRET-KEY",
+								"value": "{{partnerKey}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"from_account\": \"{{agent_Phone}}\",\n  \"to_account\": \"{{customer1Phone}}\",\n  \"amount\": 0\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/transaction/deposit",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"transaction",
+								"deposit"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -1405,6 +1520,64 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Send Money - Invalid Amount (Negative)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Send Money - Status code is 400 for zero amount', function () {",
+									"    pm.response.to.have.status(400);",
+									"});",
+									"",
+									"pm.test('Send Money - Error message for invalid amount', function () {",
+									"    const res = pm.response.json();",
+									"    pm.expect(res.message).to.eql('Amount must be a valid number greater than 0');",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{customer1_token}}",
+								"type": "text"
+							},
+							{
+								"key": "X-AUTH-SECRET-KEY",
+								"value": "{{partnerKey}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"from_account\": \"{{customer1Phone}}\",\n  \"to_account\": \"{{customer2Phone}}\",\n  \"amount\": 0\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/transaction/sendmoney",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"transaction",
+								"sendmoney"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -1588,6 +1761,64 @@
 						"body": {
 							"mode": "raw",
 							"raw": "{\n  \"from_account\": \"{{customer2Phone}}\",\n  \"to_account\": \"{{agent_Phone}}\",\n  \"amount\": 999999999\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/transaction/withdraw",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"transaction",
+								"withdraw"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cashout - Invalid Amount (Negative)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Cashout - Status code is 400 for zero amount', function () {",
+									"    pm.response.to.have.status(400);",
+									"});",
+									"",
+									"pm.test('Cashout - Error message for invalid amount', function () {",
+									"    const res = pm.response.json();",
+									"    pm.expect(res.message).to.eql('Amount must be a valid number greater than 0');",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{customer2_token}}",
+								"type": "text"
+							},
+							{
+								"key": "X-AUTH-SECRET-KEY",
+								"value": "{{partnerKey}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"from_account\": \"{{customer2Phone}}\",\n  \"to_account\": \"{{agent_Phone}}\",\n  \"amount\": 0\n}",
 							"options": {
 								"raw": {
 									"language": "json"
